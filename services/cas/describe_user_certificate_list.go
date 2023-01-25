@@ -20,24 +20,24 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/responses"
 )
 
-// ListUserCertificateDetail invokes the cas.ListUserCertificateDetail API synchronously
-// api document: https://help.aliyun.com/api/cas/ListUserCertificateDetail.html
-func (client *Client) ListUserCertificateDetail(request *ListUserCertificateDetailRequest) (response *ListUserCertificateDetailResponse, err error) {
-	response = CreateListUserCertificateDetailResponse()
+// DescribeUserCertificateList invokes the cas.DescribeUserCertificateList API synchronously
+// api document: https://help.aliyun.com/api/cas/describeusercertificatelist.html
+func (client *Client) DescribeUserCertificateList(request *DescribeUserCertificateListRequest) (response *DescribeUserCertificateListResponse, err error) {
+	response = CreateDescribeUserCertificateListResponse()
 	err = client.DoAction(request, response)
 	return
 }
 
-// ListUserCertificateDetailWithChan invokes the cas.ListUserCertificateDetail API asynchronously
-// api document: https://help.aliyun.com/api/cas/ListUserCertificateDetail.html
+// DescribeUserCertificateListWithChan invokes the cas.DescribeUserCertificateList API asynchronously
+// api document: https://help.aliyun.com/api/cas/describeusercertificatelist.html
 // asynchronous document: https://help.aliyun.com/document_detail/66220.html
-func (client *Client) ListUserCertificateDetailWithChan(request *ListUserCertificateDetailRequest) (<-chan *ListUserCertificateDetailResponse, <-chan error) {
-	responseChan := make(chan *ListUserCertificateDetailResponse, 1)
+func (client *Client) DescribeUserCertificateListWithChan(request *DescribeUserCertificateListRequest) (<-chan *DescribeUserCertificateListResponse, <-chan error) {
+	responseChan := make(chan *DescribeUserCertificateListResponse, 1)
 	errChan := make(chan error, 1)
 	err := client.AddAsyncTask(func() {
 		defer close(responseChan)
 		defer close(errChan)
-		response, err := client.ListUserCertificateDetail(request)
+		response, err := client.DescribeUserCertificateList(request)
 		if err != nil {
 			errChan <- err
 		} else {
@@ -52,16 +52,16 @@ func (client *Client) ListUserCertificateDetailWithChan(request *ListUserCertifi
 	return responseChan, errChan
 }
 
-// ListUserCertificateDetailWithCallback invokes the cas.ListUserCertificateDetail API asynchronously
-// api document: https://help.aliyun.com/api/cas/ListUserCertificateDetail.html
+// DescribeUserCertificateListWithCallback invokes the cas.DescribeUserCertificateList API asynchronously
+// api document: https://help.aliyun.com/api/cas/describeusercertificatelist.html
 // asynchronous document: https://help.aliyun.com/document_detail/66220.html
-func (client *Client) ListUserCertificateDetailWithCallback(request *ListUserCertificateDetailRequest, callback func(response *ListUserCertificateDetailResponse, err error)) <-chan int {
+func (client *Client) DescribeUserCertificateListWithCallback(request *DescribeUserCertificateListRequest, callback func(response *DescribeUserCertificateListResponse, err error)) <-chan int {
 	result := make(chan int, 1)
 	err := client.AddAsyncTask(func() {
-		var response *ListUserCertificateDetailResponse
+		var response *DescribeUserCertificateListResponse
 		var err error
 		defer close(result)
-		response, err = client.ListUserCertificateDetail(request)
+		response, err = client.DescribeUserCertificateList(request)
 		callback(response, err)
 		result <- 1
 	})
@@ -73,8 +73,8 @@ func (client *Client) ListUserCertificateDetailWithCallback(request *ListUserCer
 	return result
 }
 
-// ListUserCertificateDetailRequest is the request struct for api ListUserCertificateDetail
-type ListUserCertificateDetailRequest struct {
+// DescribeUserCertificateListRequest is the request struct for api DescribeUserCertificateList
+type DescribeUserCertificateListRequest struct {
 	*requests.RpcRequest
 	ShowSize    requests.Integer `position:"Query" name:"ShowSize"`
 	CurrentPage requests.Integer `position:"Query" name:"CurrentPage"`
@@ -82,8 +82,8 @@ type ListUserCertificateDetailRequest struct {
 	Lang        string           `position:"Query" name:"Lang"`
 }
 
-// ListUserCertificateDetailResponse is the response struct for api ListUserCertificateDetail
-type ListUserCertificateDetailResponse struct {
+// DescribeUserCertificateListResponse is the response struct for api DescribeUserCertificateList
+type DescribeUserCertificateListResponse struct {
 	*responses.BaseResponse
 	RequestId       string        `json:"RequestId" xml:"RequestId"`
 	TotalCount      int           `json:"TotalCount" xml:"TotalCount"`
@@ -92,19 +92,19 @@ type ListUserCertificateDetailResponse struct {
 	CertificateList []Certificate `json:"CertificateList" xml:"CertificateList"`
 }
 
-// CreateListUserCertificateDetailRequest creates a request to invoke ListUserCertificateDetail API
-func CreateListUserCertificateDetailRequest() (request *ListUserCertificateDetailRequest) {
-	request = &ListUserCertificateDetailRequest{
+// CreateDescribeUserCertificateListRequest creates a request to invoke DescribeUserCertificateList API
+func CreateDescribeUserCertificateListRequest() (request *DescribeUserCertificateListRequest) {
+	request = &DescribeUserCertificateListRequest{
 		RpcRequest: &requests.RpcRequest{},
 	}
-	request.InitWithApiInfo("cas", "2018-07-13", "ListUserCertificateDetail", "cas", "openAPI")
+	request.InitWithApiInfo("cas", "2018-07-13", "DescribeUserCertificateList", "cas", "openAPI")
 	request.Method = requests.POST
 	return
 }
 
-// CreateListUserCertificateDetailResponse creates a response to parse from ListUserCertificateDetail response
-func CreateListUserCertificateDetailResponse() (response *ListUserCertificateDetailResponse) {
-	response = &ListUserCertificateDetailResponse{
+// CreateDescribeUserCertificateListResponse creates a response to parse from DescribeUserCertificateList response
+func CreateDescribeUserCertificateListResponse() (response *DescribeUserCertificateListResponse) {
+	response = &DescribeUserCertificateListResponse{
 		BaseResponse: &responses.BaseResponse{},
 	}
 	return
