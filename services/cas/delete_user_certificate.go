@@ -21,6 +21,7 @@ import (
 )
 
 // DeleteUserCertificate invokes the cas.DeleteUserCertificate API synchronously
+// api document: https://help.aliyun.com/api/cas/deleteusercertificate.html
 func (client *Client) DeleteUserCertificate(request *DeleteUserCertificateRequest) (response *DeleteUserCertificateResponse, err error) {
 	response = CreateDeleteUserCertificateResponse()
 	err = client.DoAction(request, response)
@@ -28,6 +29,8 @@ func (client *Client) DeleteUserCertificate(request *DeleteUserCertificateReques
 }
 
 // DeleteUserCertificateWithChan invokes the cas.DeleteUserCertificate API asynchronously
+// api document: https://help.aliyun.com/api/cas/deleteusercertificate.html
+// asynchronous document: https://help.aliyun.com/document_detail/66220.html
 func (client *Client) DeleteUserCertificateWithChan(request *DeleteUserCertificateRequest) (<-chan *DeleteUserCertificateResponse, <-chan error) {
 	responseChan := make(chan *DeleteUserCertificateResponse, 1)
 	errChan := make(chan error, 1)
@@ -50,6 +53,8 @@ func (client *Client) DeleteUserCertificateWithChan(request *DeleteUserCertifica
 }
 
 // DeleteUserCertificateWithCallback invokes the cas.DeleteUserCertificate API asynchronously
+// api document: https://help.aliyun.com/api/cas/deleteusercertificate.html
+// asynchronous document: https://help.aliyun.com/document_detail/66220.html
 func (client *Client) DeleteUserCertificateWithCallback(request *DeleteUserCertificateRequest, callback func(response *DeleteUserCertificateResponse, err error)) <-chan int {
 	result := make(chan int, 1)
 	err := client.AddAsyncTask(func() {
@@ -73,6 +78,7 @@ type DeleteUserCertificateRequest struct {
 	*requests.RpcRequest
 	CertId   requests.Integer `position:"Query" name:"CertId"`
 	SourceIp string           `position:"Query" name:"SourceIp"`
+	Lang     string           `position:"Query" name:"Lang"`
 }
 
 // DeleteUserCertificateResponse is the response struct for api DeleteUserCertificate
@@ -86,7 +92,7 @@ func CreateDeleteUserCertificateRequest() (request *DeleteUserCertificateRequest
 	request = &DeleteUserCertificateRequest{
 		RpcRequest: &requests.RpcRequest{},
 	}
-	request.InitWithApiInfo("cas", "2020-04-07", "DeleteUserCertificate", "", "")
+	request.InitWithApiInfo("cas", "2018-07-13", "DeleteUserCertificate", "cas", "openAPI")
 	request.Method = requests.POST
 	return
 }
